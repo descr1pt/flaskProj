@@ -1,9 +1,13 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
 
 
-menu = ["Главная", "Первая страница", "Поддержка"]
+menu = [
+        {'name': 'Установка', 'url': 'install-flask'},
+        {'name': 'Первое приложение', 'url': 'first-app'},
+        {'name': 'Поддержка', 'url': 'contact'}
+]
 
 
 @app.route('/index')
@@ -24,11 +28,18 @@ def profile(username):
     return f'Пользователь: {username}'
 
 
-with app.test_request_context():
-    print(url_for('index'))
-    print(url_for('about'))
-    print(url_for('profile', username="descr1pt"))
+@app.route('/contact', methods=['POST'])
+def contact():
+    if request.method == 'POST':
+        print(request.form['username'])
+    return render_template('contact.html', title = 'Поддержка', menu=menu)
 
 
-# if __name__ == "__main__":
-#     app.run(debug=True)
+# with app.test_request_context():
+#     print(url_for('index'))
+#     print(url_for('about'))
+#     print(url_for('profile', username="descr1pt"))
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
