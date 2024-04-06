@@ -49,6 +49,11 @@ div.content {
 	font-size: 16px;
 }
 
+.flash2 {padding: 50px;
+		border: 1px solid #FF4343;
+		background: #FF9C9C;	
+}
+
 .flash {padding: 10px}
 .flash.success {
 	border: 1px solid #21DB56;
